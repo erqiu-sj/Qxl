@@ -29,8 +29,6 @@ function Insert() {
   const [total, setTotal] = useState(null);
   // Time
   const [Time, setTime] = useState(null);
-  // 备注
-  const [remarks, setRemarks] = useState(null);
   return (
     <div>
       <Menu setSelect={setSelect} />
@@ -42,7 +40,6 @@ function Insert() {
       <Input pl="废品" set={setScrap} />
       <Input pl="单价" set={setPrice} />
       <Input pl="合计" set={setTotal} />
-      <Input pl="备注" set={setRemarks} />
       <br />
       <Data set={setTime} />
       <Update />
@@ -59,7 +56,6 @@ function Insert() {
           scrap,
           price,
           total,
-          remarks,
           Time,
           His
         )}
@@ -80,7 +76,6 @@ async function Get(
   scrap,
   price,
   total,
-  remarks,
   Time,
   His
 ) {
@@ -98,7 +93,6 @@ async function Get(
         scrap,
         price,
         total,
-        remarks,
         Time,
       },
     });
