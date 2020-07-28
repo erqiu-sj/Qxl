@@ -49,7 +49,6 @@ class App extends React.Component {
               style={{
                 padding: 24,
                 minHeight: 360,
-                height: "85vh",
                 marginTop: 12,
                 borderRadius: 10,
               }}

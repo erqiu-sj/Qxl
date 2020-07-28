@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Menu from "../../Components/Insert/menu";
 import Input from "../../Components/Insert/input";
+import Update from "../../Components/Insert/Updata";
 import { message, Button } from "antd";
 import Data from "../../Components/Insert/Data";
 import { Http } from "../../network/request";
 import { useHistory } from "react-router-dom";
+
 function Insert() {
   const His = useHistory();
   // 产品名称
@@ -43,6 +45,7 @@ function Insert() {
       <Input pl="备注" set={setRemarks} />
       <br />
       <Data set={setTime} />
+      <Update />
       <Button
         type="link"
         onClick={Get.bind(

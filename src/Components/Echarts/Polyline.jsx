@@ -1,70 +1,116 @@
 import { init } from "echarts";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
+import { Http } from "../../network/request";
+
 function Polyline() {
-  useLayoutEffect(() => {
-    const myEcharts = init(document.querySelector("#one"));
-    const option = {
-      tooltip: {
-        trigger: "axis",
-      },
-      legend: {
-        data: ["邮件营销", "联盟广告", "视频广告", "直接访问", "搜索引擎"],
-      },
-      grid: {
-        left: "3%",
-        right: "4%",
-        bottom: "3%",
-        containLabel: true,
-      },
-      xAxis: {
-        type: "category",
-        boundaryGap: false,
-        data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-        axisTick: {
-          show: false,
+  useEffect(() => {
+    (async () => {
+      const result = await Http({
+        url: "/Show",
+        params: {
+          Time: new Date().getMonth() + 1,
+          Type: "ECHARTS",
         },
-      },
-      yAxis: {
-        type: "value",
-      },
-      series: [
-        {
-          name: "邮件营销",
-          type: "line",
-          data: [120, 132, 101, 134, 90, 230, 210],
-          smooth: true,
-        },
-        {
-          name: "联盟广告",
-          type: "line",
-          data: [220, 182, 191, 234, 290, 330, 310],
-          smooth: true,
-        },
-        {
-          name: "视频广告",
-          type: "line",
-          smooth: true,
-          data: [150, 232, 201, 154, 190, 330, 410],
-        },
-        {
-          name: "直接访问",
-          type: "line",
-          data: [320, 332, 301, 334, 390, 330, 320],
-          smooth: true,
-        },
-        {
-          name: "搜索引擎",
-          type: "line",
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-          smooth: true,
-        },
-      ],
-    };
-    window.addEventListener("resize", () => {
-      myEcharts.resize();
-    });
-    myEcharts.setOption(option);
+      });
+      let Name = [];
+      let Salary = [];
+      result.data.forEach((item) => {
+        Name.push(Object.values(item)[0]);
+        Salary.push(Object.values(item)[1]);
+      });
+      try {
+        const myEcharts = init(document.querySelector("#one"));
+        const option = {
+          title: {
+            text: "六月",
+            subtext: "数据来自账单",
+          },
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              type: "shadow",
+            },
+          },
+          legend: {
+            data: ["六月"],
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "value",
+            boundaryGap: [0, 0.01],
+            axisTick: {
+              show: false,
+            },
+          },
+          yAxis: {
+            type: "category",
+            data: Name.length !== 0 && Name,
+          },
+          series: [
+            {
+              name: "六月",
+              type: "bar",
+              data: Salary.length !== 0 && Salary,
+            },
+          ],
+        };
+        window.addEventListener("resize", () => {
+          myEcharts.resize();
+        });
+        myEcharts.setOption(option);
+      } catch (e) {
+        const myEcharts = init(document.querySelector("#one"));
+        const option = {
+          title: {
+            text: "六月",
+            subtext: "数据来自账单",
+          },
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              type: "shadow",
+            },
+          },
+          legend: {
+            data: ["六月"],
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "value",
+            boundaryGap: [0, 0.01],
+            axisTick: {
+              show: false,
+            },
+          },
+          yAxis: {
+            type: "category",
+            data: Name.length !== 0 && Name,
+          },
+          series: [
+            {
+              name: "六月",
+              type: "bar",
+              data: Salary.length !== 0 && Salary,
+            },
+          ],
+        };
+        window.addEventListener("resize", () => {
+          myEcharts.resize();
+        });
+        myEcharts.setOption(option);
+      }
+    })();
   }, []);
-  return <div id="one" style={{ height: 500, width: 500 }}></div>;
+  return <div id="one" style={{ height: "500%", width: "60%" }}></div>;
 }
 export default Polyline;
