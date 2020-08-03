@@ -3,8 +3,6 @@ import { Table, notification } from "antd";
 import { Http } from "../../network/request";
 const openNotification = (Name, D) => {
   //查看备注 或者修改备注
-  console.log(Name);
-  console.log(D);
   notification.open({
     message: "备注",
     description: "<h1>???</h1>",
